@@ -5,7 +5,7 @@ const userRoutes = require("./routes/user");
 const favoritosRoutes = require("./routes/favoritos");
 const cors = require("cors");
 const app = express();
-const port = 9000;
+const port = process.env.PORT || 9000;
 
 //middleware
 app.use(express.json());
