@@ -1,47 +1,44 @@
 const express = require("express");
-const userSchema = require("../models/user");
+const favoritosSchema = require("../models/favoritos");
 
 const router = express.Router();
 
 //create user
-router.post("/users", (req, res) => {
-	const user = userSchema(req.body);
-	user
+router.post("/favoritos", (req, res) => {
+	const favoritos = favoritosSchema(req.body);
+	favoritos
 		.save()
 		.then((data) => res.json(data))
 		.catch((error) => res.json({ message: error }));
 });
 
 //get all users
-router.get("/users", (req, res) => {
-	userSchema
+router.get("/favoritos", (req, res) => {
+	favoritosSchema
 		.find()
 		.then((data) => res.json(data))
 		.catch((error) => res.json({ message: error }));
 });
 
 //get a users
-router.get("/users/:id", (req, res) => {
+router.get("/favoritos/:id", (req, res) => {
 	const { id } = req.params;
-	userSchema
+	favoritosSchema
 		.findById(id)
 		.then((data) => res.json(data))
 		.catch((error) => res.json({ message: error }));
 });
 
 //update a users
-router.put("/users/:id", (req, res) => {
+router.put("/favoritosSchema/:id", (req, res) => {
 	const { id } = req.params;
-	const { nomb_cliente, correo, usuario, contraseña } = req.body;
-	userSchema
+	const { id_pokemon } = req.body;
+	favoritosSchema
 		.updateOne(
 			{ _id: id },
 			{
 				$set: {
-					nomb_cliente,
-					correo,
-					usuario,
-					contraseña,
+					id_pokemon,
 				},
 			}
 		)
@@ -50,9 +47,9 @@ router.put("/users/:id", (req, res) => {
 });
 
 //delete a users
-router.delete("/users/:id", (req, res) => {
+router.delete("/favoritos/:id", (req, res) => {
 	const { id } = req.params;
-	userSchema
+	favoritosSchema
 		.remove({ _id: id })
 		.then((data) => res.json(data))
 		.catch((error) => res.json({ message: error }));
